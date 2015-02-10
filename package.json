@@ -1,0 +1,8 @@
+{
+  "name": "palooza-api",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.11.2",
+    "mysql2": "0.15.0"
+  }
+}
