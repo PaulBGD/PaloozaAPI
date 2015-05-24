@@ -1,3 +1,5 @@
+var debug = require('debug')('PaloozaAPI:method');
+
 module.exports = {
     path: "from-id",
     type: "POST",
@@ -6,7 +8,8 @@ module.exports = {
     params: {
         id: {
             type: "integer",
-            description: "The player's id"
+            description: "The player's id",
+            required: true
         }
     },
     example: {
@@ -16,13 +19,10 @@ module.exports = {
             uuid: "a4c2c06f-c35d-42d4-87e8-87d74613ae85"
         }
     },
-    handleRequest: function(app, params, connection, callback) {
-        if(!params.id || /^-?[0-9]+$/.test(params.id)) {
-            return callback('Missing numerical parameter id');
-        }
-        connection.execute('SELECT `name`,`uuid` FROM `palooza`.`accounts` WHERE `id` = ?', [params.id], function(err, rows) {
+    handleRequest: function(_palooza, params, callback) {
+        _palooza.database.execute('SELECT `name`,`uuid` FROM `palooza`.`accounts` WHERE `id` = ?', [params.id], function(err, rows) {
             if(err) {
-                app.logError('Failed to select player from database using id "' + params.id + '"');
+                debug('Failed to select player from database using id "' + params.id + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];

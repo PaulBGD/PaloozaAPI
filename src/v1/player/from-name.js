@@ -1,3 +1,5 @@
+var debug = require('debug')('PaloozaAPI:method');
+
 module.exports = {
     path: "from-name",
     type: "POST",
@@ -6,7 +8,11 @@ module.exports = {
     params: {
         name: {
             type: "string",
-            description: "The player's name"
+            description: "The player's name",
+            length: {
+                max: 16,
+            },
+            required: true
         }
     },
     example: {
@@ -16,13 +22,10 @@ module.exports = {
             uuid: "a4c2c06f-c35d-42d4-87e8-87d74613ae85"
         }
     },
-    handleRequest: function(app, params, connection, callback) {
-        if(!params.name || params.name.length > 16) {
-            return callback('Missing parameter name.');
-        }
-        connection.execute('SELECT `id`,`uuid` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function(err, rows) {
+    handleRequest: function(_palooza, params, callback) {
+        _palooza.database.execute('SELECT `id`,`uuid` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function(err, rows) {
             if(err) {
-                app.logError('Failed to select player from database using name "' + params.name + '"');
+                debug('Failed to select player from database using name "' + params.name + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];

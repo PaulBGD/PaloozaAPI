@@ -1,12 +1,15 @@
+var debug = require('debug')('PaloozaAPI:method');
+
 module.exports = {
     path: "from-id",
-    type: "POST",
+    type: "GET",
     parent: "game",
     description: "Returns a games' data from it's id",
     params: {
         id: {
             type: "integer",
-            description: "The games' id"
+            description: "The games' id",
+            required: true
         }
     },
     example: {
@@ -16,13 +19,10 @@ module.exports = {
             winner: "a4c2c06f-c35d-42d4-87e8-87d74613ae85"
         }
     },
-    handleRequest: function(app, params, connection, callback) {
-        if(!params.id || /^-?[0-9]+$/.test(params.id)) {
-            return callback('Missing numerical parameter id');
-        }
-        connection.execute('SELECT `type`.`winner` FROM `palooza`.`game_records` WHERE `game` = ?', [params.id], function(err, rows) {
+    handleRequest: function(_palooza, params, callback) {
+        _palooza.database.execute('SELECT `type`,`winner` FROM `game_records` WHERE `game` = ?', [params.id], function(err, rows) {
             if(err) {
-                app.logError('Failed to select game from database using id "' + params.id + '"');
+                debug('Failed to select game from database using id "' + params.id + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];

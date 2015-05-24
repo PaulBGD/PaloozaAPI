@@ -1,35 +1,36 @@
-var fs = require('fs');
+var http = require('http');
+var path = require('path');
 
-function Application() {
-    setInterval(this.saveLogs, 2000);
-}
+var express = require('express');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var mysql = require('mysql2');
+var debug = require('debug')('PaloozaAPI:server');
 
-Application.prototype.log = [];
+var config = require(path.join(process.cwd(), 'config.json'));
 
-Application.prototype.logError = function (message, error) {
-    if (!error) {
-        error = message;
-        message = '';
-    }
-    this.log.push({message: message, error: error});
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/v1', require('./src/routes/v1'));
+
+// I condone global objects, but oh they're great
+global._palooza = {
+    database: mysql.createPool(config.database)
 };
 
-Application.prototype.saveLogs = function() {
-    if(this.log.length) {
-        var log = [];
-        for(var i = 0; i < this.log.length; i++) {
-            var entry = this.log[i];
-            log.push('[ERROR] ');
-            log.push(entry.message);
-            log.push('\n');
-            log.push(entry.error);
-            log.push('\n');
-        }
-        fs.appendFile('./log.txt', log.join(), function(err) {
-            if(err) {
-                console.error(err.stack); // nothing else to do at this point
-            }
-        });
-        this.logs = [];
-    }
-};
+var server = http.createServer(app);
+server.on('listening', function () {
+    debug('Listening on ' + config.server.port);
+});
+server.listen(config.server.port);
