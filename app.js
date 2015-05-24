@@ -22,8 +22,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./src/routes/index'));
-app.use('/v1', require('./src/routes/v1'));
+app.use((config.path || '') + '/', require('./src/routes/index'));
+app.use((config.path || '') + '/v1', require('./src/routes/v1'));
 
 // I condone global objects, but oh they're great
 global._palooza = {
