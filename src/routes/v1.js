@@ -13,7 +13,10 @@ var methods = [
     'player/from-id',
     'player/from-name',
     'player/from-uuid',
-    'player/data/ranks'
+    'player/data/ranks',
+
+    'servers/servers',
+    'servers/running'
 ];
 
 methods.forEach(function (method) {

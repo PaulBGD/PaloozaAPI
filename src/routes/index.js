@@ -11,16 +11,27 @@ var methods = [
     'player/from-id',
     'player/from-name',
     'player/from-uuid',
-    'player/data/ranks'
+    'player/data/ranks',
+
+    'servers/servers',
+    'servers/running'
 ];
 
 var data = [];
+var nav = {};
 methods.forEach(function(method) {
-    data.push(require('../v1/' + method));
+    var object = require('../v1/' + method);
+    data.push(object);
+    var parent = object.parent.split('/')[0];
+    if (nav[parent]) {
+        nav[parent].push(object);
+    } else {
+        nav[parent] = [object];
+    }
 });
 
 router.get('/', function (req, res) {
-    res.render('index', {methods: data});
+    res.render('index', {methods: data, nav: nav});
 });
 
 module.exports = router;
