@@ -4,6 +4,9 @@ var express = require('express');
 var router = express.Router();
 
 var methods = [
+    'faction/factions',
+    'faction/by-name',
+
     'game/from-id',
     'game/from-winner',
 
@@ -15,7 +18,7 @@ var methods = [
 
 methods.forEach(function (method) {
     var object = require(path.join(process.cwd(), './src/v1', method));
-    router.use('/' + path.join(object.parent, object.path).replace(/\\/g, '/'), function (req, res) {
+    var request = function (req, res) {
         var params;
         if (req.body.length > 0) {
             params = req.body;
@@ -81,7 +84,19 @@ methods.forEach(function (method) {
             }
             return res.json(response);
         })
-    });
+    };
+    router.use('/' + object.parent + '/' + object.path, request);
+    router.use('/' + object.parent + '/' + object.path + '.json', request); // for things that require the extension
+});
+
+var data = [];
+methods.forEach(function (method) {
+    data.push(require('../v1/' + method));
+});
+
+router.use('/', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.send(JSON.stringify(data, null, 3));
 });
 
 router.use('*', function (req, res) {
@@ -89,10 +104,6 @@ router.use('*', function (req, res) {
         error: true,
         message: 'Method not found'
     });
-});
-
-router.get('*', function (req, res) {
-    res.json({hi: "hi"});
 });
 
 module.exports = router;

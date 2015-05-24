@@ -6,7 +6,6 @@ To do
 ===
 - View running game details
 - View stats about previous games
-- More player data (points, achievements, etc)
+- More player data (achievements, etc)
 
 WIP
-===

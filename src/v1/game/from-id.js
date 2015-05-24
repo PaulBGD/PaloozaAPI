@@ -2,7 +2,7 @@ var debug = require('debug')('PaloozaAPI:method');
 
 module.exports = {
     path: "from-id",
-    type: "GET",
+    type: "POST",
     parent: "game",
     description: "Returns a games' data from it's id",
     params: {

@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var methods = [
+    'faction/factions',
+    'faction/by-name',
+
     'game/from-id',
     'game/from-winner',
 

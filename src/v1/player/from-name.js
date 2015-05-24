@@ -19,11 +19,14 @@ module.exports = {
         "PaulBGD": {
             id: 1,
             name: "PaulBGD",
-            uuid: "a4c2c06f-c35d-42d4-87e8-87d74613ae85"
+            uuid: "a4c2c06f-c35d-42d4-87e8-87d74613ae85",
+            faction: "BGD",
+            server: "factions",
+            time: 373771
         }
     },
     handleRequest: function(_palooza, params, callback) {
-        _palooza.database.execute('SELECT `id`,`uuid` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function(err, rows) {
+        _palooza.database.execute('SELECT `id`,`uuid`,`faction`,`points`,`server`,`time` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function(err, rows) {
             if(err) {
                 debug('Failed to select player from database using name "' + params.name + '"', err);
                 return callback('Internal error occurred');
@@ -34,7 +37,10 @@ module.exports = {
                 object[params.name] = {
                     id: row.id,
                     name: params.name,
-                    uuid: row.uuid
+                    uuid: row.uuid,
+                    faction: row.faction,
+                    server: row.server,
+                    time: row.time
                 };
                 callback(undefined, object);
             } else {
