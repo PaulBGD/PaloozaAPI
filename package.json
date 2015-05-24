@@ -7,6 +7,7 @@
     "debug": "^2.2.0",
     "ejs": "^2.3.1",
     "express": "^4.11.2",
+    "express-better-ratelimit": "^1.1.2",
     "morgan": "^1.5.3",
     "mysql2": "0.15.0"
   }

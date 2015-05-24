@@ -4,6 +4,7 @@ var path = require('path');
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var limit = require('express-better-ratelimit');
 var mysql = require('mysql2');
 var debug = require('debug')('PaloozaAPI:server');
 
@@ -21,6 +22,12 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(limit({
+    duration: 10000, // 10s
+    max: 10,
+    accessLimited: '{"error":true,"message":"Rate limit exceeded"}'
+}));
 
 app.use((config.path || '') + '/', require('./src/routes/index'));
 app.use((config.path || '') + '/v1', require('./src/routes/v1'));
