@@ -9,7 +9,8 @@ module.exports = {
         uuid: {
             type: "string",
             description: "The player's uuid",
-            length: 36
+            length: 36,
+            required: true
         }
     },
     example: {
