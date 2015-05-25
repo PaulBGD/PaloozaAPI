@@ -63,7 +63,12 @@
 
         #baseUrl {
             display: inline-block;
-            width: auto !important;
+            width: auto;
+            max-width: 100%;
+        }
+
+        pre.form-control {
+            height: auto;
         }
     </style>
 </head>
@@ -86,12 +91,24 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <%
-                methods.forEach(function (method) {
-                    var path = method.parent + '/' + method.path;
+                for (var property in nav) {
+                    var navMethods = nav[property];
                 %>
-                <li><a href="#<%= path %>"><%= path %></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= property %> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <%
+                        navMethods.forEach(function (method) {
+                            var path = method.parent + '/' + method.path;
+                        %>
+                        <li><a href="#<%= path %>"><%= path %></a></li>
+                        <%
+                        });
+                        %>
+                    </ul>
+                </li>
                 <%
-                });
+                }
                 %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -102,6 +119,7 @@
 </nav>
 <div id="home" class="jumbotron text-center">
     <h1>Palooza API</h1>
+
     <div class="container-fixed">
         <hr>
         <div class="form-group">
@@ -144,8 +162,8 @@
             }
             %>
             <h4>Example</h4>
-            <pre>POST http://dev.minigamepalooza.com/api/v1/<%= path %></pre>
-            <pre><%= JSON.stringify(method.example, null, 3) %></pre>
+            <pre class="form-control">POST http://dev.minigamepalooza.com/api/v1/<%= path %></pre>
+            <pre class="form-control"><%= JSON.stringify(method.example, null, 3) %></pre>
         </div>
     </div>
     <%
