@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "dependencies": {
     "async": "^1.0.0",
+    "bcryptjs": "^2.1.0",
     "body-parser": "^1.12.4",
     "debug": "^2.2.0",
     "ejs": "^2.3.1",
     "express": "^4.11.2",
     "express-better-ratelimit": "^1.1.2",
     "morgan": "^1.5.3",
-    "mysql2": "0.15.0"
+    "mysql2": "0.15.0",
+    "require-async": "0.0.3"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }

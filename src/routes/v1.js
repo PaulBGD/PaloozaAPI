@@ -14,9 +14,13 @@ var methods = [
     'player/from-name',
     'player/from-uuid',
     'player/data/ranks',
+    'player/auth/authenticate',
 
     'servers/servers',
-    'servers/running'
+    'servers/running',
+    'servers/chat/from-user',
+    'servers/chat/latest',
+    'servers/chat/send'
 ];
 
 methods.forEach(function (method) {
@@ -40,17 +44,17 @@ methods.forEach(function (method) {
                     if (typeof param.length == 'object') {
                         if (param.length.min) {
                             if (value.length < param.length.min) {
-                                return res.json({error: true, message: 'Parameter ' + property + ' has a minimum length of ' + param.min});
+                                return res.json({error: true, message: 'Parameter ' + property + ' has a minimum length of ' + param.length.min});
                             }
                         }
                         if (param.max) {
                             if (value.length > param.length.max) {
-                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.max});
+                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
                             }
                         }
                     } else if (typeof param.length == 'number') {
                         if (value.length > param.length) {
-                            return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.max});
+                            return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
                         }
                     }
                 }
@@ -64,17 +68,17 @@ methods.forEach(function (method) {
                         if (typeof param.length == 'object') {
                             if (param.length.min) {
                                 if (value < param.length.min) {
-                                    return res.json({error: true, message: 'Parameter ' + property + ' has a minimum length of ' + param.min});
+                                    return res.json({error: true, message: 'Parameter ' + property + ' has a minimum length of ' + param.length.min});
                                 }
                             }
                             if (param.max) {
                                 if (value > param.length.max) {
-                                    return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.max});
+                                    return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
                                 }
                             }
                         } else if (typeof param.length == 'number') {
                             if (value > param.length) {
-                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.max});
+                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
                             }
                         }
                     }

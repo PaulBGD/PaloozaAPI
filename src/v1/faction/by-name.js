@@ -12,6 +12,7 @@ module.exports = {
                 min: 1,
                 max: 10
             },
+            description: "The name of the faction",
             required: true
         }
     },
