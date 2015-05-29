@@ -2,6 +2,7 @@ var http = require('http');
 var path = require('path');
 
 var express = require('express');
+var cors = require('cors');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var limit = require('express-better-ratelimit');
@@ -18,6 +19,17 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var allowedSites = [
+    'http://dev.minigamepalooza.com',
+    'http://www.minigamepalooza.com'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        return callback(null, allowedSites.indexOf(origin) !== -1);
+    }
+}));
 
 app.use(limit({
     duration: 10000, // 10s
