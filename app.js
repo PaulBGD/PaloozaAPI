@@ -23,14 +23,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use(limit({
-    duration: 10000, // 10s
+    duration: 5000, // 5s
     max: 10,
     accessLimited: '{"error":true,"message":"Rate limit exceeded"}'
 }));
 
 app.use((config.path || '') + '/v1/servers/chat/send', limit({
-    duration: 10000, // 10s
-    max: 4,
+    duration: 2000, // 2s
+    max: 1,
     accessLimited: '{"error":true,"message":"Rate limit exceeded"}'
 }));
 
