@@ -29,8 +29,8 @@ app.use(limit({
 }));
 
 app.use((config.path || '') + '/v1/servers/chat/send', limit({
-    duration: 2000, // 2s
-    max: 1,
+    duration: 3000, // 3s
+    max: 3,
     accessLimited: '{"error":true,"message":"Rate limit exceeded"}'
 }));
 
