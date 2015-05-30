@@ -105,7 +105,7 @@
                 }
                 %>
                 <h4>Example</h4>
-                <pre class="form-control">POST http://dev.minigamepalooza.com/api/v1/<%= path %></pre>
+                <pre class="form-control">POST http://dev.minigamepalooza.com/api/v1/<%= method.parent + '/' + method.path %></pre>
                 <pre class="form-control"><%= JSON.stringify(method.example, null, 3) %></pre>
             </div>
         </div>
