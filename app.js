@@ -24,7 +24,7 @@ app.use(cors());
 
 app.use(limit({
     duration: 5000, // 5s
-    max: 10,
+    max: 15,
     accessLimited: '{"error":true,"message":"Rate limit exceeded"}'
 }));
 
