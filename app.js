@@ -20,16 +20,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var allowedSites = [
-    'http://dev.minigamepalooza.com',
-    'http://www.minigamepalooza.com'
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        return callback(null, allowedSites.indexOf(origin) !== -1);
-    }
-}));
+app.use(cors());
 
 app.use(limit({
     duration: 10000, // 10s

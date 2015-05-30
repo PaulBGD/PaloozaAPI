@@ -55,7 +55,7 @@ module.exports = {
     },
     handleRequest: function (_palooza, params, callback) {
         if (params.server) {
-            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? AND `server` = ? SORT BY `time` ASC LIMIT ?', [
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? AND `server` = ? ORDER BY `time` ASC LIMIT ?', [
                 params.id,
                 params.startAt || 0,
                 params.server,
@@ -73,24 +73,22 @@ module.exports = {
                 callback(undefined, object);
             });
         } else {
-            if (params.server) {
-                _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? SORT BY `time` ASC LIMIT ?', [
-                    params.id,
-                    params.startAt || 0,
-                    params.count || 10], function (err, rows) {
-                    if (err) {
-                        debug('Failed to select chat messages from database"', err);
-                        return callback('Internal error occurred');
-                    }
-                    var object = {};
-                    var length = rows.length;
-                    while (length--) {
-                        var row = rows[length];
-                        object[row.uid] = row;
-                    }
-                    callback(undefined, object);
-                });
-            }
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? ORDER BY `time` ASC LIMIT ?', [
+                params.id,
+                params.startAt || 0,
+                params.count || 10], function (err, rows) {
+                if (err) {
+                    debug('Failed to select chat messages from database"', err);
+                    return callback('Internal error occurred');
+                }
+                var object = {};
+                var length = rows.length;
+                while (length--) {
+                    var row = rows[length];
+                    object[row.uid] = row;
+                }
+                callback(undefined, object);
+            });
         }
     }
 };

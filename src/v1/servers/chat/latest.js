@@ -49,7 +49,7 @@ module.exports = {
         }
     },
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? AND `server` = ? LIMIT ?', [params.startAt || 0, params.server, params.count || 10], function (err, rows) {
+        _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? AND `server` = ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.server, params.count || 10], function (err, rows) {
             if (err) {
                 debug('Failed to select chat messages from database"', err);
                 return callback('Internal error occurred');

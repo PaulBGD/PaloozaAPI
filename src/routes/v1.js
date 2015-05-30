@@ -11,6 +11,7 @@ var methods = [
     'game/from-winner',
 
     'player/from-id',
+    'player/from-ids',
     'player/from-name',
     'player/from-uuid',
     'player/data/ranks',
