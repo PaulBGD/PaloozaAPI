@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/', function (req, res) {
-    console.log(JSON.stringify(req.body.text));
+    console.log(JSON.stringify(req.body));
     var parameters = (req.body.text || '').split(' ');
     if (parameters.length === 0) {
         res.send('Available subcommands: servers');
