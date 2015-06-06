@@ -12,7 +12,7 @@ module.exports = {
         "Developers"
     ],
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT DISTINCT `faction` FROM `accounts` WHERE `faction` IS NOT NULL', function (err, rows) {
+        _palooza.database.execute('SELECT DISTINCT `faction` FROM `accounts` WHERE `faction` IS NOT NULL ORDER BY `faction`', function (err, rows) {
             if (err) {
                 debug('Failed to select Factions from database"', err);
                 return callback('Internal error occurred');
