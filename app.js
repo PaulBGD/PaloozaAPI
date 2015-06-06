@@ -36,6 +36,7 @@ app.use((config.path || '') + '/v1/servers/chat/send', limit({
 
 app.use((config.path || '') + '/', require('./src/routes/index'));
 app.use((config.path || '') + '/v1', require('./src/routes/v1'));
+app.use((config.path || '') + '/slack', require('./src/routes/slack'));
 
 // I condone global objects, but oh they're great
 global._palooza = {
