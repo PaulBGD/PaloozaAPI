@@ -5,7 +5,13 @@ module.exports = {
     type: "POST",
     parent: "servers",
     description: "Returns a list of all servers and their players",
-    params: {},
+    params: {
+        server: {
+            type: "string",
+            length: "10",
+            description: "The server to get the players from"
+        }
+    },
     example: {
         lobby: [
             1,
@@ -19,24 +25,46 @@ module.exports = {
         ]
     },
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT `accounts`.`id`, `servers`.`server` FROM `accounts`, `servers` WHERE `accounts`.`server` = `servers`.`server`', function (err, rows) {
-            if (err) {
-                debug('Failed to select servers from database"', err);
-                return callback('Internal error occurred');
-            }
-            var object = {};
-            var length = rows.length;
-            while (length--) {
-                var row = rows[length];
-                var list = object[row.server];
-                if (list) {
-                    list.push(row.id);
-                } else {
-                    list = [row.id];
-                    object[row.server] = list;
+        if (params.server) {
+            _palooza.database.execute('SELECT `accounts`.`id`, `servers`.`server` FROM `accounts`, `servers` WHERE `servers`.`server` = ? AND `accounts`.`server` = `servers`.`server`', [params.server], function (err, rows) {
+                if (err) {
+                    debug('Failed to select servers from database"', err);
+                    return callback('Internal error occurred');
                 }
-            }
-            callback(undefined, object);
-        });
+                var object = {};
+                var length = rows.length;
+                while (length--) {
+                    var row = rows[length];
+                    var list = object[row.server];
+                    if (list) {
+                        list.push(row.id);
+                    } else {
+                        list = [row.id];
+                        object[row.server] = list;
+                    }
+                }
+                callback(undefined, object);
+            });
+        } else {
+            _palooza.database.execute('SELECT `accounts`.`id`, `servers`.`server` FROM `accounts`, `servers` WHERE `accounts`.`server` = `servers`.`server`', function (err, rows) {
+                if (err) {
+                    debug('Failed to select servers from database"', err);
+                    return callback('Internal error occurred');
+                }
+                var object = {};
+                var length = rows.length;
+                while (length--) {
+                    var row = rows[length];
+                    var list = object[row.server];
+                    if (list) {
+                        list.push(row.id);
+                    } else {
+                        list = [row.id];
+                        object[row.server] = list;
+                    }
+                }
+                callback(undefined, object);
+            });
+        }
     }
 };

@@ -73,7 +73,7 @@ methods.forEach(function (method) {
                                     return res.json({error: true, message: 'Parameter ' + property + ' has a minimum length of ' + param.length.min});
                                 }
                             }
-                            if (param.max) {
+                            if (param.length.max) {
                                 if (value > param.length.max) {
                                     return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
                                 }

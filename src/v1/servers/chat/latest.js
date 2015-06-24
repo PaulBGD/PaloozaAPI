@@ -9,8 +9,7 @@ module.exports = {
         server: {
             type: "string",
             length: "10",
-            description: "The server of the chat messages",
-            required: true
+            description: "The server of the chat messages"
         },
         count: {
             type: "integer",
@@ -49,18 +48,34 @@ module.exports = {
         }
     },
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? AND `server` = ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.server, params.count || 10], function (err, rows) {
-            if (err) {
-                debug('Failed to select chat messages from database"', err);
-                return callback('Internal error occurred');
-            }
-            var object = {};
-            var length = rows.length;
-            while (length--) {
-                var row = rows[length];
-                object[row.uid] = row;
-            }
-            callback(undefined, object);
-        });
+        if (params.server) {
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? AND `server` = ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.server, params.count || 10], function (err, rows) {
+                if (err) {
+                    debug('Failed to select chat messages from database"', err);
+                    return callback('Internal error occurred');
+                }
+                var object = {};
+                var length = rows.length;
+                while (length--) {
+                    var row = rows[length];
+                    object[row.uid] = row;
+                }
+                callback(undefined, object);
+            });
+        } else {
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.count || 10], function (err, rows) {
+                if (err) {
+                    debug('Failed to select chat messages from database"', err);
+                    return callback('Internal error occurred');
+                }
+                var object = {};
+                var length = rows.length;
+                while (length--) {
+                    var row = rows[length];
+                    object[row.uid] = row;
+                }
+                callback(undefined, object);
+            });
+        }
     }
 };
