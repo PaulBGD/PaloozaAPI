@@ -80,7 +80,7 @@ methods.forEach(function (method) {
                             }
                         } else if (typeof param.length == 'number') {
                             if (value > param.length) {
-                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length.max});
+                                return res.json({error: true, message: 'Parameter ' + property + ' has a max length of ' + param.length});
                             }
                         }
                     }

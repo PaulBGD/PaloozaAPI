@@ -25,7 +25,7 @@ module.exports = {
         message: {
             type: "string",
             description: "The message to send",
-            length: 100,
+            length: 200,
             required: true
         }
     },
