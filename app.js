@@ -13,7 +13,6 @@ if (cluster.isMaster) {
     }
     console.log('Created ' + numCPUs + ' processes.');
 
-    var fs = require('fs');
     var phantom = require('phantom');
 
     function renderImage() {
@@ -25,7 +24,7 @@ if (cluster.isMaster) {
                         return;
                     }
                     setTimeout(function () {
-                        page.render(path.join(process.cwd(), 'traffic.png'));
+                        page.render(path.join(process.cwd(), 'public', 'traffic.png'));
                     }, 200);
                 });
             })
