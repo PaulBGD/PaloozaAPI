@@ -22,6 +22,7 @@ var methods = [
     'servers/servers',
     'servers/running',
     'servers/players',
+    'servers/traffic',
     'servers/chat/from-user',
     'servers/chat/latest',
     'servers/chat/send'

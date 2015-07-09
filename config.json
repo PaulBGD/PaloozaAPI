@@ -1,6 +1,7 @@
 {
   "server": {
-    "port": "3000"
+    "port": "3000",
+    "traffic_url": "http://localhost:3000/traffix/live"
   },
   "database": {
     "host": "127.0.0.1",

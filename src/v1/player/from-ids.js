@@ -28,7 +28,7 @@ module.exports = {
         ids = ids.filter(function (elem, index, self) {
             return index == self.indexOf(elem);
         });
-        if (ids.length > 10) {
+        if (ids.length > 100) {
             return callback('Please do not use more than 100 ids');
         }
         var string = '';

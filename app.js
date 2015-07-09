@@ -1,5 +1,42 @@
-var http = require('http');
+var cluster = require('cluster');
 var path = require('path');
+var debug = require('debug')('PaloozaAPI:server');
+
+var config = require(path.join(process.cwd(), 'config.json'));
+
+if (cluster.isMaster) {
+    var numCPUs = process.env.CORES || require('os').cpus().length;
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+    console.log('Created ' + numCPUs + ' processes.');
+
+    var fs = require('fs');
+    var phantom = require('phantom');
+
+    function renderImage() {
+        phantom.create(function (ph) {
+            ph.createPage(function (page) {
+                page.open(config.traffic_url, function (status) {
+                    if (status == 'fail') {
+                        debug('Failed to update status image!');
+                        return;
+                    }
+                    setTimeout(function() {
+                        page.render(path.join(process.cwd(), 'traffic.png'), function() {
+                            _palooza.image = fs.readFileSync(path.join(process.cwd(), 'traffic.png'));
+                        });
+                    }, 200);
+                });
+            })
+        });
+    }
+    renderImage();
+    setInterval(renderImage, 10 * 60 * 1000); // every 10 minutes
+    return;
+}
+
+var http = require('http');
 
 var express = require('express');
 var cors = require('cors');
@@ -7,9 +44,6 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var limit = require('express-better-ratelimit');
 var mysql = require('mysql2');
-var debug = require('debug')('PaloozaAPI:server');
-
-var config = require(path.join(process.cwd(), 'config.json'));
 
 var app = express();
 
@@ -37,10 +71,12 @@ app.use((config.path || '') + '/v1/servers/chat/send', limit({
 app.use((config.path || '') + '/', require('./src/routes/index'));
 app.use((config.path || '') + '/v1', require('./src/routes/v1'));
 app.use((config.path || '') + '/slack', require('./src/routes/slack'));
+app.use((config.path || '') + '/traffic', require('./src/routes/traffic'));
 
 // I condone global objects, but oh they're great
 global._palooza = {
-    database: mysql.createPool(config.database)
+    database: mysql.createPool(config.database),
+    image: ''
 };
 
 var server = http.createServer(app);
