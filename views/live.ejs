@@ -68,10 +68,7 @@
             split = split.splice(0, split.length - 2);
             var location = split.join('/') + 'v1/servers/traffic';
         } else {
-            url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-            split = url.split('/');
-            split = split.splice(0, split.length - 2);
-            location = split.join('/').replace('/api', 'api') + '/v1/servers/traffic';
+            location = 'http://dev.minigamepalooza.com/api/v1/servers/traffic';
         }
 
         ajax(location, 'POST', {}, function (err, chunks) {
