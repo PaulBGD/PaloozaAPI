@@ -4,6 +4,8 @@ var debug = require('debug')('PaloozaAPI:server');
 
 var config = require(path.join(process.cwd(), 'config.json'));
 
+global._palooza = {}; // empty for now
+
 if (cluster.isMaster) {
     var numCPUs = process.env.CORES || require('os').cpus().length;
     for (var i = 0; i < numCPUs; i++) {
