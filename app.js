@@ -24,8 +24,8 @@ if (cluster.isMaster) {
                         debug('Failed to update status image!');
                         return;
                     }
-                    setTimeout(function() {
-                        page.render(path.join(process.cwd(), 'traffic.png'), function() {
+                    setTimeout(function () {
+                        page.render(path.join(process.cwd(), 'traffic.png'), function () {
                             _palooza.image = fs.readFileSync(path.join(process.cwd(), 'traffic.png'));
                         });
                     }, 200);
@@ -33,6 +33,7 @@ if (cluster.isMaster) {
             })
         });
     }
+
     renderImage();
     setInterval(renderImage, 10 * 60 * 1000); // every 10 minutes
     return;
@@ -76,10 +77,7 @@ app.use((config.path || '') + '/slack', require('./src/routes/slack'));
 app.use((config.path || '') + '/traffic', require('./src/routes/traffic'));
 
 // I condone global objects, but oh they're great
-global._palooza = {
-    database: mysql.createPool(config.database),
-    image: ''
-};
+global._palooza.database = mysql.createPool(config.database);
 
 var server = http.createServer(app);
 server.on('listening', function () {
