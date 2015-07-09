@@ -18,7 +18,7 @@ if (cluster.isMaster) {
     function renderImage() {
         phantom.create(function (ph) {
             ph.createPage(function (page) {
-                page.viewportSize = {width: 800, height: 350};
+                page.set('viewportSize', {width: 800, height: 350});
                 page.open(config.traffic_url, function (status) {
                     if (status == 'fail') {
                         debug('Failed to update status image!', config.traffic_url);
