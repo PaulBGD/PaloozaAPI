@@ -32,7 +32,7 @@ if (cluster.isMaster) {
         });
     }
 
-    renderImage();
+    setTimeout(renderImage, 1000);
     setInterval(renderImage, 10 * 60 * 1000); // every 10 minutes
     return;
 }
