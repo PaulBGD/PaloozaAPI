@@ -67,14 +67,13 @@ module.exports = {
                     return callback('Internal error occurred');
                 }
                 var object = {};
+                for (var i = 0; i < 10; i++) {
+                    object[current.subtract(i).toNumber()] = [];
+                }
                 var length = rows.length;
                 while (length--) {
                     var row = rows[length];
-                    if (object[row.time]) {
-                        object[row.time].push(row.id);
-                    } else {
-                        object[row.time] = [row.id];
-                    }
+                    object[row.time].push(row.id);
                 }
                 callback(undefined, object);
             });
