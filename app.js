@@ -18,6 +18,7 @@ if (cluster.isMaster) {
     function renderImage() {
         phantom.create(function (ph) {
             ph.createPage(function (page) {
+                page.viewportSize = {width: 800, height: 350};
                 page.open(config.traffic_url, function (status) {
                     if (status == 'fail') {
                         debug('Failed to update status image!', config.traffic_url);
@@ -25,7 +26,7 @@ if (cluster.isMaster) {
                     }
                     setTimeout(function () {
                         page.render(path.join(process.cwd(), 'public', 'traffic.png'));
-                    }, 200);
+                    }, 1000);
                 });
             })
         });
