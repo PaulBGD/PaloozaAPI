@@ -61,10 +61,18 @@
             xmlhttp.send();
         }
 
-        var url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-        var split = url.split('/');
-        split = split.splice(0, split.length - 2);
-        var location = split.join('/') + 'v1/servers/traffic';
+        // quick hack for dev & prod version
+        if (window.location.port == 3000) {
+            var url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
+            var split = url.split('/');
+            split = split.splice(0, split.length - 2);
+            var location = split.join('/') + 'v1/servers/traffic';
+        } else {
+            url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
+            split = url.split('/');
+            split = split.splice(0, split.length - 3);
+            location = split.join('/') + '/v1/servers/traffic';
+        }
 
         ajax(location, 'POST', {}, function (err, chunks) {
             chunks = JSON.parse(chunks);
