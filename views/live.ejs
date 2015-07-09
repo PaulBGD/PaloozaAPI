@@ -70,8 +70,8 @@
         } else {
             url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
             split = url.split('/');
-            split = split.splice(0, split.length - 3);
-            location = split.join('/') + '/v1/servers/traffic';
+            split = split.splice(0, split.length - 2);
+            location = split.join('/').replace('/api', 'api') + '/v1/servers/traffic';
         }
 
         ajax(location, 'POST', {}, function (err, chunks) {
