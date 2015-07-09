@@ -21,13 +21,11 @@ if (cluster.isMaster) {
             ph.createPage(function (page) {
                 page.open(config.traffic_url, function (status) {
                     if (status == 'fail') {
-                        debug('Failed to update status image!');
+                        debug('Failed to update status image!', config.traffic_url);
                         return;
                     }
                     setTimeout(function () {
-                        page.render(path.join(process.cwd(), 'traffic.png'), function () {
-                            _palooza.image = fs.readFileSync(path.join(process.cwd(), 'traffic.png'));
-                        });
+                        page.render(path.join(process.cwd(), 'traffic.png'));
                     }, 200);
                 });
             })
