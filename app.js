@@ -13,27 +13,9 @@ if (cluster.isMaster) {
     }
     console.log('Created ' + numCPUs + ' processes.');
 
-    var phantom = require('phantom');
-
-    function renderImage() {
-        phantom.create(function (ph) {
-            ph.createPage(function (page) {
-                page.set('viewportSize', {width: 800, height: 350});
-                page.open(config.traffic_url, function (status) {
-                    if (status == 'fail') {
-                        debug('Failed to update status image!', config.traffic_url);
-                        return;
-                    }
-                    setTimeout(function () {
-                        page.render(path.join(process.cwd(), 'public', 'traffic.png'));
-                    }, 1000);
-                });
-            })
-        });
-    }
-
-    setTimeout(renderImage, 1000);
-    setInterval(renderImage, 10 * 60 * 1000); // every 10 minutes
+    var traffic = require('./src/utils/traffic');
+    traffic(); // initial
+    setInterval(traffic, 10 * 60 * 1000); // every 10 minutes
     return;
 }
 
