@@ -25,7 +25,6 @@ var config = require('../../config.json');
 
 function render() {
     request(config.server.traffic_url, function (err, status, body) {
-        console.log(body.toString());
         try {
             var chunks = JSON.parse(body.toString());
         } catch(err) {
