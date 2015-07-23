@@ -11,6 +11,8 @@ var methods = [
 
     'game/from-id',
     'game/from-winner',
+    'game/info/maps',
+    'game/info/modes',
 
     'player/from-id',
     'player/from-ids',
