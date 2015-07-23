@@ -37,8 +37,8 @@ module.exports = {
             callback(undefined, rows);
         }
         if (params.game) {
-            return _palooza.database.execute('SELECT * FROM `game_modes` WHERE `game` = ?', [params.game], execute);
+            return _palooza.database.execute('SELECT `game`,`mode`,`id` FROM `game_modes` WHERE `game` = ? AND `enabled` = 1', [params.game], execute);
         }
-        _palooza.database.execute('SELECT * FROM `game_modes`', execute);
+        _palooza.database.execute('SELECT * FROM `game_modes` WHERE `enabled` = 1', execute);
     }
 };
