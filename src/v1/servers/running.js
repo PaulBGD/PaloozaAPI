@@ -21,7 +21,7 @@ module.exports = {
         }
     ],
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT `server`,`game`,`players`,`running` FROM `games` WHERE `test` = 0 AND `ready` = 1', function (err, rows) {
+        _palooza.database.execute('SELECT `server`,`game`,`players`,`running`,`map`,`mode` FROM `games` WHERE `test` = 0 AND `ready` = 1', function (err, rows) {
             if (err) {
                 debug('Failed to select running minigames from database"', err);
                 return callback('Internal error occurred');
