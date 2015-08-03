@@ -34,16 +34,11 @@ module.exports = {
                 debug('Failed to select maps from database using game "' + params.game + '"', err);
                 return callback('Internal error occurred');
             }
-            var length = rows.length;
-            while (length--) {
-                var row = rows[length];
-                row.enabled = !!row.enabled[0];
-            }
             callback(undefined, rows);
         }
         if (params.game) {
             return _palooza.database.execute('SELECT `game`,`mode`,`id` FROM `game_modes` WHERE `game` = ? AND `enabled` = 1', [params.game], execute);
         }
-        _palooza.database.execute('SELECT * FROM `game_modes` WHERE `enabled` = 1', execute);
+        _palooza.database.execute('SELECT `game`,`mode`,`id` FROM `game_modes` WHERE `enabled` = 1', execute);
     }
 };
