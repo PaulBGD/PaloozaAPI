@@ -55,7 +55,7 @@ module.exports = {
     },
     handleRequest: function (_palooza, params, callback) {
         if (params.server) {
-            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? AND `server` = ? ORDER BY `time` ASC LIMIT ?', [
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? AND `server` = ? ORDER BY `time` DESC LIMIT ?', [
                 params.id,
                 params.startAt || 0,
                 params.server,
@@ -73,7 +73,7 @@ module.exports = {
                 callback(undefined, object);
             });
         } else {
-            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? ORDER BY `time` ASC LIMIT ?', [
+            _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `id` = ? AND `uid` >= ? ORDER BY `time` DESC LIMIT ?', [
                 params.id,
                 params.startAt || 0,
                 params.count || 10], function (err, rows) {
