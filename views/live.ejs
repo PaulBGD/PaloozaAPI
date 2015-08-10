@@ -105,7 +105,7 @@
             var raw = [];
             for (var i = 0; i < sorted.length; i++) {
                 // round to hour
-                labels[i] = moment((Date.now() - (60 * 60 * 1000) + (sorted[i].time * 30 * 60 * 1000)).startOf('hour').format('h:mm a');
+                labels[i] = moment((Date.now() - (60 * 60 * 1000)) + (sorted[i].time * 30 * 60 * 1000)).startOf('hour').format('h:mm a');
                 raw[i] = sorted[i].data;
             }
             var data = {
