@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Palooza API</title>
+    <title>Traffic</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,6 +73,15 @@
 
         ajax(location, 'POST', {}, function (err, chunks) {
             chunks = JSON.parse(chunks);
+            // remove even chunks
+            var remove = true;
+            var length = chunks.length;
+            while (length--) {
+                if (remove) {
+                    chunks.splice(length, 1);
+                }
+                remove = !remove;
+            }
             var sorted = [];
             var top = -Infinity;
             for (var property in chunks) {
@@ -95,7 +104,8 @@
             var labels = [];
             var raw = [];
             for (var i = 0; i < sorted.length; i++) {
-                labels[i] = moment(Date.now() + (sorted[i].time * 30 * 60 * 1000)).format('h:mm a');
+                // round to hour
+                labels[i] = moment(Date.now() + (sorted[i].time * 30 * 60 * 1000)).startOf('hour').format('h:mm a');
                 raw[i] = sorted[i].data;
             }
             var data = {
