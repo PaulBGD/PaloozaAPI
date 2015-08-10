@@ -73,13 +73,6 @@
 
         ajax(location, 'POST', {}, function (err, chunks) {
             chunks = JSON.parse(chunks);
-            // remove even chunks
-            var length = chunks.length;
-            while (length--) {
-                if (length % 2 == 1) {
-                    chunks.splice(length, 1);
-                }
-            }
             var sorted = [];
             var top = -Infinity;
             for (var property in chunks) {
@@ -98,6 +91,12 @@
                 }
                 return 0;
             });
+            var length = sorted.length;
+            while (length--) {
+                if (length % 2 == 1) {
+                    sorted.splice(length, 1);
+                }
+            }
             console.log(sorted);
             var labels = [];
             var raw = [];
