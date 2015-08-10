@@ -93,7 +93,7 @@
             });
             var length = sorted.length;
             while (length--) {
-                if (length % 2 == 1) {
+                if (length % 2 == 1 || (length == 0 && moment(Date.now() + (sorted[length].time * 30 * 60 * 1000)).minute() >= 30)) {
                     sorted.splice(length, 1);
                 }
             }
