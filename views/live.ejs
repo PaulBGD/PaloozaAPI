@@ -74,13 +74,11 @@
         ajax(location, 'POST', {}, function (err, chunks) {
             chunks = JSON.parse(chunks);
             // remove even chunks
-            var remove = true;
             var length = chunks.length;
             while (length--) {
-                if (remove) {
+                if (length % 2 == 1) {
                     chunks.splice(length, 1);
                 }
-                remove = !remove;
             }
             var sorted = [];
             var top = -Infinity;
