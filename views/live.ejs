@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Palooza API</title>
+    <title>Traffic</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,11 +91,21 @@
                 }
                 return 0;
             });
+            var length = sorted.length;
+            while (length--) {
+                if (length % 2 == 1) {
+                    sorted.splice(length, 1);
+                }
+            }
+            if (moment(Date.now() + ((top + 10) * 30 * 60 * 1000)).minute() >= 30) {
+                sorted.splice(sorted.length - 1, 1);
+            }
             console.log(sorted);
             var labels = [];
             var raw = [];
             for (var i = 0; i < sorted.length; i++) {
-                labels[i] = moment(Date.now() + (sorted[i].time * 30 * 60 * 1000)).format('h:mm a');
+                // round to hour
+                labels[i] = moment(Date.now() + (sorted[i].time * 30 * 60 * 1000)).startOf('hour').format('h:mm a');
                 raw[i] = sorted[i].data;
             }
             var data = {
@@ -112,7 +122,7 @@
                 ]
             };
 
-            new Chart(ctx).Line(data, {bezierCurve: false});
+            new Chart(ctx).Line(data, {bezierCurve: false, scaleBeginAtZero: true});
         });
     })();
 </script>
