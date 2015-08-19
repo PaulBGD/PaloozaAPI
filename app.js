@@ -1,5 +1,6 @@
-var cluster = require('cluster');
+var fs = require('fs');
 var path = require('path');
+var cluster = require('cluster');
 var debug = require('debug')('PaloozaAPI:server');
 
 var config = require(path.join(process.cwd(), 'config.json'));
@@ -7,6 +8,12 @@ var config = require(path.join(process.cwd(), 'config.json'));
 global._palooza = {}; // empty for now
 
 if (cluster.isMaster) {
+    var publicCss = path.join(process.cwd(), 'public', 'main.css');
+    var strapCss = path.join(process.cwd(), 'Strapalooza', 'css', 'main.css');
+    if (!fs.existsSync(publicCss)) {
+        fs.createReadStream(strapCss).pipe(fs.createWriteStream(publicCss));
+    }
+
     var numCPUs = process.env.CORES || require('os').cpus().length;
     for (var i = 0; i < numCPUs; i++) {
         cluster.fork();

@@ -17,6 +17,7 @@ var methods = [
     'player/from-name',
     'player/from-uuid',
     'player/stats/global',
+    'player/data/traffic',
     'player/data/ranks',
     'player/auth/authenticate',
 

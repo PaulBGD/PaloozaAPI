@@ -20,6 +20,7 @@ var methods = [
     'player/from-uuid',
     'player/stats/global',
     'player/data/ranks',
+    'player/data/traffic',
     'player/auth/authenticate',
 
     'servers/servers',
@@ -48,6 +49,9 @@ methods.forEach(function(method) {
 var render = ejs.render(fs.readFileSync(path.join(process.cwd(), 'views', 'index.ejs')).toString(), {methods: data, nav: nav});
 
 router.get('/', function (req, res) {
+    if (process.env.NODE_ENV != 'production') {
+        render = ejs.render(fs.readFileSync(path.join(process.cwd(), 'views', 'index.ejs')).toString(), {methods: data, nav: nav});
+    }
     res.send(render);
 });
 
