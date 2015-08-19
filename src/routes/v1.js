@@ -19,6 +19,7 @@ var methods = [
     'player/stats/global',
     'player/data/traffic',
     'player/data/ranks',
+    'player/data/punishments',
     'player/auth/authenticate',
 
     'servers/servers',
@@ -108,7 +109,7 @@ methods.forEach(function (method) {
     data.push(require('../v1/' + method));
 });
 
-router.use('/', function (req, res) {
+router.use('/methods', function (req, res) {
     res.set('Content-Type', 'application/json');
     res.send(JSON.stringify(data, null, 3));
 });

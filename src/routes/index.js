@@ -21,6 +21,7 @@ var methods = [
     'player/stats/global',
     'player/data/ranks',
     'player/data/traffic',
+    'player/data/punishments',
     'player/auth/authenticate',
 
     'servers/servers',
