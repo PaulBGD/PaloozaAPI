@@ -20,7 +20,8 @@ module.exports = {
                 date: 1439936414118,
                 type: 'chat',
                 reason: 'muted for reason',
-                cleared: false
+                cleared: false,
+                uid: 1
             },
             {
                 punisher: 1,
@@ -28,12 +29,13 @@ module.exports = {
                 date: 1439936414118,
                 type: 'ban',
                 reason: 'permabanned for hacking',
-                cleared: true
+                cleared: true,
+                uid: 2
             }
         ]
     },
     handleRequest: function (_palooza, params, callback) {
-        _palooza.database.execute('SELECT `punisher`,`time`,`date`,`type`,`reason`,`cleared` FROM `punishments` WHERE `id` = ?', [params.id], function (err, rows) {
+        _palooza.database.execute('SELECT `punisher`,`time`,`date`,`type`,`reason`,`cleared`,`uid` FROM `punishments` WHERE `id` = ?', [params.id], function (err, rows) {
             if (err) {
                 debug('Failed to select punishments from database"', err);
                 return callback('Internal error occurred');
