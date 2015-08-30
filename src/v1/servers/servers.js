@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "servers",
     type: "POST",
@@ -21,7 +19,7 @@ module.exports = {
     handleRequest: function (_palooza, params, callback) {
         _palooza.database.execute('SELECT * FROM `servers`', function (err, rows) {
             if (err) {
-                debug('Failed to select servers from database"', err);
+                _palooza.debug('Failed to select servers from database"', err);
                 return callback('Internal error occurred');
             }
             callback(undefined, rows);

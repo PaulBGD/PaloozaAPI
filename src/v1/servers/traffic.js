@@ -1,4 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
 var Long = require('long');
 
 var originalTime = Long.fromString('1436402032706');
@@ -39,7 +38,7 @@ module.exports = {
             }
             _palooza.database.execute('SELECT * FROM `traffic` WHERE `time` IN (' + chunks.join(',') + ')', function (err, rows) {
                 if (err) {
-                    debug('Failed to select traffic from database"', err);
+                    _palooza.debug('Failed to select traffic from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};
@@ -63,7 +62,7 @@ module.exports = {
             var current = minutesSince.subtract(minutesSince.modulo(30)).div(30);
             _palooza.database.execute('SELECT * FROM `traffic` WHERE `time` > ?', [current.subtract(10).toString()], function (err, rows) {
                 if (err) {
-                    debug('Failed to select traffic from database"', err);
+                    _palooza.debug('Failed to select traffic from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};

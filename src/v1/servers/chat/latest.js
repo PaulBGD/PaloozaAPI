@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "latest",
     type: "POST",
@@ -51,7 +49,7 @@ module.exports = {
         if (params.server) {
             _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? AND `server` = ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.server, params.count || 10], function (err, rows) {
                 if (err) {
-                    debug('Failed to select chat messages from database"', err);
+                    _palooza.debug('Failed to select chat messages from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};
@@ -65,7 +63,7 @@ module.exports = {
         } else {
             _palooza.database.execute('SELECT * FROM `palooza_chat`.`messages` WHERE `uid` >= ? ORDER BY `time` DESC LIMIT ?', [params.startAt || 0, params.count || 10], function (err, rows) {
                 if (err) {
-                    debug('Failed to select chat messages from database"', err);
+                    _palooza.debug('Failed to select chat messages from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};

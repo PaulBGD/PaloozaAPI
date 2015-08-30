@@ -37,6 +37,31 @@ var mysql = require('mysql2');
 
 var app = express();
 
+if (config.log && config.log.raven) {
+    var raven = require('raven');
+    var client = new raven.Client(config.log.raven);
+    app.use(raven.middleware.express(config.log.raven));
+    console.log('Enabled Raven Client');
+    global._palooza.debug = function (message, debug) {
+        if (message instanceof Error) {
+            var temp = message;
+            message = debug;
+            debug = temp;
+        }
+        if (debug instanceof Error) {
+            if (typeof message == 'string') {
+                debug.message = '[' + message + '] ' + debug.message;
+            }
+            console.log('Sent ' + debug);
+            client.captureError(debug);
+        } else {
+            client.captureMessage(String(message));
+        }
+    };
+} else {
+    global._palooza.debug = require('debug')('PaloozaAPI:method');
+}
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

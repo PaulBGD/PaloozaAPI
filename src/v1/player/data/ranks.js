@@ -1,5 +1,4 @@
 var async = require('async');
-var debug = require('debug')('PaloozaAPI:method');
 
 function getRanks(row) {
     var ranks = [];
@@ -77,7 +76,7 @@ module.exports = {
         if (params.name) {
             _palooza.database.execute('SELECT `director`,`developer`,`admin`,`youtuber`,`dedicated`,`committed`,`loyal` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function (err, rows) {
                 if (err) {
-                    debug('Failed to select player from database using name "' + params.name + '"', err);
+                    _palooza.debug('Failed to select player from database using name "' + params.name + '"', err);
                     return callback('Internal error occurred');
                 }
                 var row = rows[0];
@@ -94,7 +93,7 @@ module.exports = {
         } else if (params.uuid) {
             _palooza.database.execute('SELECT `director`,`developer`,`admin`,`youtuber`,`dedicated`,`committed`,`loyal` FROM `palooza`.`accounts` WHERE `uuid` = ?', [params.uuid], function (err, rows) {
                 if (err) {
-                    debug('Failed to select player from database using uuid "' + params.uuid + '"', err);
+                    _palooza.debug('Failed to select player from database using uuid "' + params.uuid + '"', err);
                     return callback('Internal error occurred');
                 }
                 var row = rows[0];
@@ -111,7 +110,7 @@ module.exports = {
         } else if (params.id) {
             _palooza.database.execute('SELECT `director`,`developer`,`admin`, `mod`,`youtuber`,`dedicated`,`committed`,`loyal` FROM `palooza`.`accounts` WHERE `id` = ?', [params.id], function (err, rows) {
                 if (err) {
-                    debug('Failed to select player from database using id "' + params.id + '"', err);
+                    _palooza.debug('Failed to select player from database using id "' + params.id + '"', err);
                     return callback('Internal error occurred');
                 }
                 var row = rows[0];
@@ -159,7 +158,7 @@ module.exports = {
             });
             async.parallel(tasks, function(err) {
                 if (err) {
-                    debug('Failed to select player from database', err);
+                    _palooza.debug('Failed to select player from database', err);
                     return callback(typeof err == 'string' ? error : 'Internal error occurred');
                 }
                 callback(null, data);

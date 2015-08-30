@@ -1,4 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
 var async = require('async');
 
 module.exports = {
@@ -25,7 +24,7 @@ module.exports = {
             }
         ], function (err, data) {
             if (err) {
-                debug('Failed to find global data', err);
+                _palooza.debug('Failed to find global data', err);
                 return callback('Internal error occurred');
             }
             var object = {

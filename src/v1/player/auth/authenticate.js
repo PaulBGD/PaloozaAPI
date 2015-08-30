@@ -1,6 +1,5 @@
 var requireAsync = require('require-async');
 
-var debug = require('debug')('PaloozaAPI:method');
 var bcrypt = requireAsync('bcryptjs');
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
     handleRequest: function (_palooza, params, callback) {
         _palooza.database.execute('SELECT `api`,`password` FROM `palooza`.`accounts` WHERE `id` = ?', [params.id], function (err, rows) {
             if (err) {
-                debug('Failed to select player from database using id "' + params.id + '"', err);
+                _palooza.debug('Failed to select player from database using id "' + params.id + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];
@@ -42,7 +41,7 @@ module.exports = {
                 }
                 bcrypt('compareSync', params.password, password, function (err, password) {
                     if (err) {
-                        debug('Failed to check passwords for id ' + params.id + '"', err);
+                        _palooza.debug('Failed to check passwords for id ' + params.id + '"', err);
                         return callback('Internal error occurred');
                     }
                     if (password) {

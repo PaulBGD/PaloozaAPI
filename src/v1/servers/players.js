@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "players",
     type: "POST",
@@ -28,7 +26,7 @@ module.exports = {
         if (params.server) {
             _palooza.database.execute('SELECT `accounts`.`id`, `servers`.`server` FROM `accounts`, `servers` WHERE `servers`.`server` = ? AND `accounts`.`server` = `servers`.`server`', [params.server], function (err, rows) {
                 if (err) {
-                    debug('Failed to select servers from database"', err);
+                    _palooza.debug('Failed to select servers from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};
@@ -48,7 +46,7 @@ module.exports = {
         } else {
             _palooza.database.execute('SELECT `accounts`.`id`, `servers`.`server` FROM `accounts`, `servers` WHERE `accounts`.`server` = `servers`.`server`', function (err, rows) {
                 if (err) {
-                    debug('Failed to select servers from database"', err);
+                    _palooza.debug('Failed to select servers from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};

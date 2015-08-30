@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "maps",
     type: "POST",
@@ -26,7 +24,7 @@ module.exports = {
     handleRequest: function (_palooza, params, callback) {
         function execute(err, rows) {
             if (err) {
-                debug('Failed to select maps from database using game "' + params.game + '"', err);
+                _palooza.debug('Failed to select maps from database using game "' + params.game + '"', err);
                 return callback('Internal error occurred');
             }
             var array = [];

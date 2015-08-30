@@ -5,8 +5,8 @@
   "homepage": "http://mgpl.me",
   "license": "MIT",
   "author": {
-    "name": "Paul Sauve",
     "email": "paul@burngames.net",
+    "name": "Paul Sauve",
     "url": "https://paulb.gd"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "moment": "^2.10.3",
     "morgan": "^1.5.3",
     "mysql2": "0.15.0",
+    "raven": "^0.8.1",
     "request": "^2.58.0",
     "require-async": "0.0.3"
   },

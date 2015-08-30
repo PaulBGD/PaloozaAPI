@@ -8,5 +8,8 @@
     "database": "palooza",
     "user": "root",
     "password": "root"
+  },
+  "log": {
+
   }
 }

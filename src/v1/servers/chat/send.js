@@ -1,5 +1,4 @@
 var async = require('async');
-var debug = require('debug')('PaloozaAPI:method');
 
 module.exports = {
     path: "send",
@@ -38,7 +37,7 @@ module.exports = {
             function (callback) {
                 _palooza.database.execute('SELECT COUNT(*) FROM `palooza`.`accounts` WHERE `id` = ? AND `api` = ?', [params.id, params.api_key], function (err, rows) {
                     if (err) {
-                        debug('Failed to find player by id ' + params.id + ' and api key ' + params.api_key + ' in database', err);
+                        _palooza.debug('Failed to find player by id ' + params.id + ' and api key ' + params.api_key + ' in database', err);
                         return callback('Internal error occurred');
                     } else if (rows.length == 0 || rows[0]['COUNT(*)'] == 0) {
                         return callback('Invalid id or API key');
@@ -49,7 +48,7 @@ module.exports = {
             function (callback) {
                 _palooza.database.execute('SELECT COUNT(*) FROM `palooza`.`servers` WHERE `server` = ?', [params.server], function (err, rows) {
                     if (err) {
-                        debug('Failed to find server by name ' + params.server + ' in database', err);
+                        _palooza.debug('Failed to find server by name ' + params.server + ' in database', err);
                         return callback('Internal error occurred');
                     } else if (rows.length == 0 || rows[0]['COUNT(*)'] == 0) {
                         return callback('Invalid server');
@@ -62,7 +61,8 @@ module.exports = {
             }
         ], function (err) {
             if (err) {
-                return callback(err);
+                _palooza.debug('Failed to insert message', err);
+                return callback('Internal error occurred');
             }
             callback(null, {error: false, message: 'Sent'});
         });

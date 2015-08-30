@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "from-name",
     type: "POST",
@@ -10,7 +8,7 @@ module.exports = {
             type: "string",
             description: "The player's name",
             length: {
-                max: 16,
+                max: 16
             },
             required: true
         }
@@ -28,7 +26,7 @@ module.exports = {
     handleRequest: function(_palooza, params, callback) {
         _palooza.database.execute('SELECT `id`,`uuid`,`faction`,`points`,`server`,`time` FROM `palooza`.`accounts` WHERE `name` = ?', [params.name], function(err, rows) {
             if(err) {
-                debug('Failed to select player from database using name "' + params.name + '"', err);
+                _palooza.debug('Failed to select player from database using name "' + params.name + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];

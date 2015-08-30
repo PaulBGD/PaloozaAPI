@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "friends",
     type: "POST",
@@ -23,7 +21,7 @@ module.exports = {
     handleRequest: function(_palooza, params, callback) {
         _palooza.database.execute('SELECT * FROM `palooza`.`friends` WHERE `friendly` = ? OR `friend` = ?', [params.id, params.id], function(err, rows) {
             if(err) {
-                debug('Failed to select friends from database using id "' + params.id + '"', err);
+                _palooza.debug('Failed to select friends from database using id "' + params.id + '"', err);
                 return callback('Internal error occurred');
             }
             var friends = [];

@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "from-uuid",
     type: "POST",
@@ -26,7 +24,7 @@ module.exports = {
     handleRequest: function(_palooza, params, callback) {
         _palooza.database.execute('SELECT `name`,`uuid`,`faction`,`points`,`server`,`time` FROM `palooza`.`accounts` WHERE `uuid` = ?', [params.uuid], function(err, rows) {
             if(err) {
-                debug('Failed to select player from database using uuid "' + params.uuid + '"', err);
+                _palooza.debug('Failed to select player from database using uuid "' + params.uuid + '"', err);
                 return callback('Internal error occurred');
             }
             var row = rows[0];

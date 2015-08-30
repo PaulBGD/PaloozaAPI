@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "from-user",
     type: "POST",
@@ -61,7 +59,7 @@ module.exports = {
                 params.server,
                 params.count || 10], function (err, rows) {
                 if (err) {
-                    debug('Failed to select chat messages from database"', err);
+                    _palooza.debug('Failed to select chat messages from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};
@@ -78,7 +76,7 @@ module.exports = {
                 params.startAt || 0,
                 params.count || 10], function (err, rows) {
                 if (err) {
-                    debug('Failed to select chat messages from database"', err);
+                    _palooza.debug('Failed to select chat messages from database"', err);
                     return callback('Internal error occurred');
                 }
                 var object = {};

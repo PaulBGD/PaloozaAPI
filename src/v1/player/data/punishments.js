@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "punishments",
     type: "POST",
@@ -37,7 +35,7 @@ module.exports = {
     handleRequest: function (_palooza, params, callback) {
         _palooza.database.execute('SELECT `punisher`,`time`,`date`,`type`,`reason`,`cleared`,`uid` FROM `punishments` WHERE `id` = ?', [params.id], function (err, rows) {
             if (err) {
-                debug('Failed to select punishments from database"', err);
+                _palooza.debug('Failed to select punishments from database"', err);
                 return callback('Internal error occurred');
             }
             var punishments = [];

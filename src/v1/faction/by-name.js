@@ -1,5 +1,3 @@
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "by-name",
     type: "POST",
@@ -28,7 +26,7 @@ module.exports = {
     handleRequest: function (_palooza, params, callback) {
         _palooza.database.execute('SELECT `id` FROM `accounts` WHERE `faction` = ?', [params.name], function (err, rows) {
             if (err) {
-                debug('Failed to select Factions from database"', err);
+                _palooza.debug('Failed to select Factions from database"', err);
                 return callback('Internal error occurred');
             }
             if (rows.length == 0) {

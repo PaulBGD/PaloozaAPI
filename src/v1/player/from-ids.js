@@ -1,6 +1,3 @@
-var async = require('async');
-var debug = require('debug')('PaloozaAPI:method');
-
 module.exports = {
     path: "from-ids",
     type: "POST",
@@ -44,7 +41,7 @@ module.exports = {
         }
         _palooza.database.execute('SELECT `id`,`name`,`uuid`,`faction`,`points`,`server`,`time` FROM `palooza`.`accounts` WHERE ' + string, ids, function (err, rows) {
             if (err) {
-                debug('Failed to select player from database using id "' + params.id + '"', err);
+                _palooza.debug('Failed to select player from database using id "' + params.id + '"', err);
                 return callback('Internal error occurred');
             }
             var length = rows.length;
