@@ -5985,154 +5985,182 @@ button.close {
   -webkit-box-shadow: inset 0 -2px 0 #ffffff;
   box-shadow: inset 0 -2px 0 #ffffff;
 }
-.btn-default {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-default:focus {
-  background-color: #ffffff;
-}
 .btn-default:hover,
-.btn-default:active:hover {
-  background-color: #f0f0f0;
+.btn-default:active,
+.btn-default:focus {
+  background: #ffffff;
 }
-.btn-default:active {
-  background-color: #e0e0e0;
-  background-image: -webkit-radial-gradient(circle, #e0e0e0 10%, #ffffff 11%);
-  background-image: radial-gradient(circle, #e0e0e0 10%, #ffffff 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-default.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-primary {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-primary:focus {
-  background-color: #f44336;
+.btn-default.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-primary:hover,
-.btn-primary:active:hover {
-  background-color: #f22819;
+.btn-primary:active,
+.btn-primary:focus {
+  background: #f65e53;
 }
-.btn-primary:active {
-  background-color: #e11b0c;
-  background-image: -webkit-radial-gradient(circle, #e11b0c 10%, #f44336 11%);
-  background-image: radial-gradient(circle, #e11b0c 10%, #f44336 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-primary.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-success {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-success:focus {
-  background-color: #4caf50;
+.btn-primary.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-success:hover,
-.btn-success:active:hover {
-  background-color: #439a46;
+.btn-success:active,
+.btn-success:focus {
+  background: #60ba63;
 }
-.btn-success:active {
-  background-color: #39843c;
-  background-image: -webkit-radial-gradient(circle, #39843c 10%, #4caf50 11%);
-  background-image: radial-gradient(circle, #39843c 10%, #4caf50 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-success.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-info {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-info:focus {
-  background-color: #9c27b0;
+.btn-success.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-info:hover,
-.btn-info:active:hover {
-  background-color: #862197;
+.btn-info:active,
+.btn-info:focus {
+  background: #b22dc9;
 }
-.btn-info:active {
-  background-color: #701c7e;
-  background-image: -webkit-radial-gradient(circle, #701c7e 10%, #9c27b0 11%);
-  background-image: radial-gradient(circle, #701c7e 10%, #9c27b0 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-info.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-warning {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-warning:focus {
-  background-color: #ff9800;
+.btn-info.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-warning:hover,
-.btn-warning:active:hover {
-  background-color: #e08600;
+.btn-warning:active,
+.btn-warning:focus {
+  background: #ffa41f;
 }
-.btn-warning:active {
-  background-color: #c27400;
-  background-image: -webkit-radial-gradient(circle, #c27400 10%, #ff9800 11%);
-  background-image: radial-gradient(circle, #c27400 10%, #ff9800 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-warning.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-danger {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-danger:focus {
-  background-color: #e51c23;
+.btn-warning.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-danger:hover,
-.btn-danger:active:hover {
-  background-color: #cb171e;
+.btn-danger:active,
+.btn-danger:focus {
+  background: #e8373e;
 }
-.btn-danger:active {
-  background-color: #b0141a;
-  background-image: -webkit-radial-gradient(circle, #b0141a 10%, #e51c23 11%);
-  background-image: radial-gradient(circle, #b0141a 10%, #e51c23 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-danger.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
 }
-.btn-link {
-  background-size: 200%;
-  background-position: 50%;
-}
-.btn-link:focus {
-  background-color: #ffffff;
+.btn-danger.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn-link:hover,
-.btn-link:active:hover {
-  background-color: #f0f0f0;
+.btn-link:active,
+.btn-link:focus {
+  background: #ffffff;
 }
-.btn-link:active {
-  background-color: #e0e0e0;
-  background-image: -webkit-radial-gradient(circle, #e0e0e0 10%, #ffffff 11%);
-  background-image: radial-gradient(circle, #e0e0e0 10%, #ffffff 11%);
-  background-repeat: no-repeat;
-  background-size: 1000%;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.btn-link.btn-ripple {
+  overflow: hidden;
+  border: 0;
+  position: relative;
+}
+.btn-link.btn-ripple > .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: white;
+  -webkit-animation: ripple-animation 0.7s;
+  -o-animation: ripple-animation 0.7s;
+  animation: ripple-animation 0.7s;
+  transform: scale(100);
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 .btn {
   text-transform: uppercase;
   border: none;
-  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-  -webkit-transition: all 0.1s;
-  -o-transition: all 0.1s;
-  transition: all 0.1s;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.36);
+  -webkit-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.btn:focus {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.6);
+  transition-delay: 0s;
+  outline: 0;
 }
 .btn-link {
   border-radius: 3px;
@@ -6144,13 +6172,65 @@ button.close {
 .btn-link:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
+  background: transparent;
   color: #444444;
   text-decoration: none;
+}
+.btn-link.btn-ripple > .ripple-effect {
+  -webkit-animation: ripple-animation-stay 0.7s;
+  -o-animation: ripple-animation-stay 0.7s;
+  animation: ripple-animation-stay 0.7s;
+  transform: scale(100);
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.btn-default:hover {
+  background-color: #eeeeee;
 }
 .btn-default.disabled {
   background-color: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
+}
+@-webkit-keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+@keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes ripple-animation-stay {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0.2;
+  }
+}
+@keyframes ripple-animation-stay {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0.2;
+  }
 }
 .btn-group .btn + .btn,
 .btn-group .btn + .btn-group,
@@ -6714,7 +6794,9 @@ body {
   margin: 74px auto 0;
 }
 .jumbotron-header > .header > .header-nav {
+  margin-top: 74px;
   font-size: 34px;
+  color: #444444;
 }
 .jumbotron-header > .header > .header-nav .nav-icon {
   float: left;
@@ -6751,11 +6833,13 @@ body {
     margin: -316px auto 16px;
     width: 1199px;
     max-width: 100%;
+    color: #fff;
   }
   .jumbotron-header > .header > img {
     margin: 30px auto;
   }
   .jumbotron-header > .header > .header-nav {
+    margin-top: 0;
     color: #fff;
   }
   .jumbotron-header > .header > .header-nav .nav-icon {
@@ -6767,6 +6851,38 @@ body {
   .jumbotron-header > .header > .nav.nav-tabs {
     text-align: left;
   }
+}
+.btn-group,
+.btn-group-vertical {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.36);
+  border-radius: 3px;
+}
+.btn-group > .btn,
+.btn-group-vertical > .btn,
+.btn-group > .btn-group,
+.btn-group-vertical > .btn-group,
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus,
+.btn-group > .btn-group:focus,
+.btn-group-vertical > .btn-group:focus,
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus,
+.btn-group > .btn-group:focus,
+.btn-group-vertical > .btn-group:focus,
+.btn-group > .btn:active,
+.btn-group-vertical > .btn:active,
+.btn-group > .btn-group:active,
+.btn-group-vertical > .btn-group:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn-group.btn-group-lg,
+.btn-group-vertical.btn-group-lg {
+  border-radius: 3px;
+}
+.btn-group.btn-group-sm,
+.btn-group-vertical.btn-group-sm {
+  border-radius: 3px;
 }
 @media (min-width: 1199px) {
   .navbar-right {
@@ -6852,4 +6968,93 @@ body {
 }
 .card > .card-footer .btn {
   color: #f44336;
+}
+.nav.nav-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -260px;
+  /* 260px is the width + shadow */
+  width: 250px;
+  padding-top: 89px;
+  overflow-y: auto;
+  background-color: #f44336;
+  z-index: 990;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
+  -webkit-transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav.nav-sidebar > .tab:first-child > a {
+  margin-top: 25px;
+}
+.nav.nav-sidebar > li > a {
+  border-radius: 5px;
+  margin: 2px 10px;
+  color: #fff;
+}
+.nav.nav-sidebar > li > a:hover,
+.nav.nav-sidebar > li > a:focus,
+.nav.nav-sidebar > li > a:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.nav.nav-sidebar > li > a > .material-icons {
+  vertical-align: middle;
+  font-size: 24px;
+  margin-right: 20px;
+  margin-left: 8px;
+}
+.nav.nav-sidebar > li.active > a {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.nav.nav-sidebar.in {
+  left: 0;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar] {
+  display: inline-block;
+  float: left;
+  color: #fff;
+  margin-right: 15px;
+  margin-left: 10px;
+  margin-top: -8px;
+  border-radius: 50%;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars > span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  margin: 4px 4px;
+  -webkit-transition: margin 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: margin 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: margin 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars > span:first-child {
+  margin-top: 8px;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars > span:last-child {
+  margin-bottom: 8px;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars.in > span {
+  margin: 6px 4px;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars.in > span:first-child {
+  margin-top: 6px;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar].bars.in > span:last-child {
+  margin-bottom: 4px;
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:hover,
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:focus,
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:hover,
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:focus,
+.navbar > .navbar-header > .navbar-brand > a[data-toggle=sidebar]:active {
+  background-color: rgba(255, 255, 255, 0.1);
 }

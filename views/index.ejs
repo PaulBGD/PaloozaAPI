@@ -35,41 +35,15 @@
         }
     </style>
 </head>
-<body data-spy="scroll" data-target="#navbar">
+<body data-spy="scroll" data-target="#sidebaraMain">
 <nav id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <span class="navbar-brand">
+            <a href="#" class="bars" data-toggle="sidebar" data-target="#sidebarMain"><span></span><span></span><span></span></a>
             Minigame <span>Palooza</span>
         </span>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
     </div>
     <div class="collapse navbar-collapse" id="nav-collapse">
-        <ul class="nav navbar-nav">
-            <%
-            for (var property in nav) {
-                var navMethods = nav[property];
-            %>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= property %> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <%
-                    navMethods.forEach(function (method) {
-                        var path = method.parent.replace('/', '') + method.path;
-                    %>
-                    <li><a href="#<%= path %>"><%= method.parent + '/' + method.path %></a></li>
-                    <%
-                    });
-                    %>
-                </ul>
-            </li>
-            <%
-            }
-            %>
-        </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="http://www.minigamepalooza.com">Back to Site</a></li>
             <li id="logoutList" class="hidden"><a id="logOut" href="#">Log Out <img id="avatar" src="#" class="img-rounded"></a></li>
@@ -77,6 +51,28 @@
     </div>
 </nav>
 
+<ul id="sidebarMain" class="nav nav-sidebar">
+    <%
+    for (var property in nav) {
+        var navMethods = nav[property];
+    %>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret material-icons"></span> <%= property %></a>
+        <ul class="dropdown-menu" style="margin-left: 10px">
+            <%
+            navMethods.forEach(function (method) {
+                var path = method.parent.replace('/', '') + method.path;
+            %>
+            <li class="sidebar-link"><a href="#<%= path %>"><%= method.parent + '/' + method.path %></a></li>
+            <%
+            });
+            %>
+        </ul>
+    </li>
+    <%
+    }
+    %>
+</ul>
 
 <div class="jumbotron-header">
     <div class="header">
@@ -87,6 +83,7 @@
         <div class="padded">
             <div class="text-center">
                 <br>
+
                 <div class="form-group">
                     <label for="baseUrl" class="text-left">Base URL</label><br>
                     <pre id="baseUrl" class="well well-sm">http://dev.minigamepalooza.com/api/v1</pre>
@@ -109,15 +106,15 @@
             %>
             <div id="<%= path %>">
                 <div class="page-header">
-                    <h2><%= method.parent + '/' + method.path %></h2>
+                    <h3><%= method.parent + '/' + method.path %></h3>
                 </div>
                 <div>
-                    <h3><%= method.description %></h3>
+                    <h4><%= method.description %></h4>
 
                     <%
                     if (Object.keys(method.params).length > 0) {
                     %>
-                    <h4>Parameters</h4>
+                    <h5>Parameters</h5>
                     <%
                     }
                             for (var property in method.params) {
@@ -136,7 +133,7 @@
                     <%
                     }
                     %>
-                    <h4>Example</h4>
+                    <h5>Example</h5>
                     <pre class="well well-sm">POST http://dev.minigamepalooza.com/api/v1/<%= method.parent + '/' + method.path %></pre>
                     <pre class="well well-lg"><%= JSON.stringify(method.example, null, 3) %></pre>
                 </div>
@@ -151,7 +148,9 @@
     %>
 </div>
 
-<script src="//cdn.jsdelivr.net/bootstrap.native/0.9.6/bootstrap-native.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="strapalooza.js"></script>
 <script>
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
@@ -184,9 +183,8 @@
                 clearTimeout(id);
             };
     }());
-</script>
-<script>
-    (function () {
+
+    (function ($) {
         var hrefs = document.getElementsByTagName('a');
         var length = hrefs.length;
         while (length--) {
@@ -200,7 +198,7 @@
                         while (elem = elem.offsetParent) {
                             offsetTop += elem.offsetTop;
                         }
-                        var spot = offsetTop - 70;
+                        var spot = offsetTop - 120;
                         var time = Math.abs(window.scrollY - offsetTop) / 10;
                         smoothScrollTo(spot, time);
                         e.preventDefault();
@@ -230,7 +228,39 @@
             var timer = setInterval(step, 10);
             return timer; // return the interval timer, so you can clear it elsewhere
         }
-    })();
+
+        var targets = {};
+
+        $('.sidebar-link > a').each(function () {
+            var $this = $(this);
+            targets[$this.attr('href')] = $this;
+        });
+
+        $(window).on('scroll', function () {
+            for (var property in targets) {
+                if (targets.hasOwnProperty(property)) {
+                    var target = $(property);
+                    if (checkVisible(target.find('h3'), 'visible')) {
+                        $('.sidebar-link.active').toggleClass('active');
+                        $('#sidebarMain > li.active').toggleClass('active');
+                        targets[property].parent().addClass('active').parent().parent().addClass('active');
+                        return;
+                    }
+                }
+            }
+        });
+
+        function checkVisible(elm) {
+            var vpH = $(window).height(), // Viewport Height
+                    st = $(window).scrollTop(), // Scroll Top
+                    y = $(elm).offset().top,
+                    elementHeight = $(elm).height();
+
+            return ((y < (vpH + st)) && (y > (st - elementHeight)));
+        }
+
+        $('body').scrollspy({target: '#sidebaraMain'})
+    })(jQuery);
 </script>
 </body>
 </html>
