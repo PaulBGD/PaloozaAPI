@@ -7,6 +7,28 @@ var config = require(path.join(process.cwd(), 'config.json'));
 
 global._palooza = {}; // empty for now
 
+if (process.env.HEAPDUMP) {
+    // start our tool to analyze heap dumps
+    var heapdump = require('heapdump');
+    var memwatch = require('memwatch-next');
+    memwatch.on('leak', function(info) {
+        console.error(info);
+        var folder = '/tmp/';
+        if (process.platform == 'win32' || process.platform == 'mswin') {
+            folder = './temp/'; // windows has no /tmp/, so just put it here
+            if (!fs.existsSync(folder)) {
+                fs.mkdirSync(folder);
+            }
+        }
+        var file = '/tmp/paloozaapi-' + process.pid + '-' + Date.now() + '.heapsnapshot';
+        heapdump.writeSnapshot(file, function(err){
+            if (err) {
+                console.error(err);
+            }
+        });
+    });
+}
+
 if (cluster.isMaster) {
     var publicCss = path.join(process.cwd(), 'public', 'main.css');
     var strapCss = path.join(process.cwd(), 'Strapalooza', 'css', 'main.css');
